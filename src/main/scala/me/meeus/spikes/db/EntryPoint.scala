@@ -22,8 +22,8 @@ object EntryPoint extends App {
   implicit val session: AutoSession.type = AutoSession
 
   println("Creating an author table...")
-  val createdTable: Try[Unit] = new InitializeAuthorTable().execute()
-  createdTable match {
+  val createdTableResult: Try[Unit] = new InitializeAuthorTable().execute()
+  createdTableResult match {
     case Success(_) => println("Created Authors Table or already exists")
     case Failure(e) => println(s"Failed to create Authors Table with exception: $e")
   }

@@ -21,9 +21,9 @@ class GetAuthorById(implicit session: DBSession = AutoSession) extends IGetAnAut
          """.stripMargin
 
     statement
-      .map(rs => DBAuthor(rs))
-      .first()
-      .apply()
-      .map(_.toAuthor)
+      .map(rs => DBAuthor(rs)) // Apply the result set to a DBAuthor
+      .first() // Grab the first result if it exists
+      .apply() // Run the query
+      .map(_.toAuthor) // Map the DBAuthor back to an Author
   }
 }
