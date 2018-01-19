@@ -1,24 +1,24 @@
 package me.meeus.spikes.db.postgres
 
 import me.meeus.spikes.db.commands.IInitializeAnAuthorTable
-
+import scalikejdbc._
 import scala.util.Try
 
-object InitializeAuthorTable extends IInitializeAnAuthorTable with PostgresConnection {
-
-  import scalikejdbc._
-
+class InitializeAuthorTable(implicit session: DBSession = AutoSession) extends IInitializeAnAuthorTable {
   private val createAuthorTable =
     sql"""
-         |create table if not exists authors (
-         |  id serial not null primary key,
-         |  first_name varchar(64) not null,
-         |  last_name varchar(64) not null
+         |CREATE TABLE IF NOT EXISTS authors (
+         |  id VARCHAR(36) NOT NULL PRIMARY KEY,
+         |  first_name VARCHAR(64) NOT NULL,
+         |  last_name VARCHAR(64) NOT NULL
          |)
     """.stripMargin
 
-
   override def execute(): Try[Unit] = {
-    Try(createAuthorTable.execute().apply())
+    Try {
+      createAuthorTable
+        .execute()
+        .apply()
+    }
   }
 }

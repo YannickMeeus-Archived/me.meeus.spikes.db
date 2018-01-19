@@ -10,6 +10,7 @@ lazy val root = (project in file(".")).
       "org.scalikejdbc" %% "scalikejdbc" % "3.1.0",
       "com.h2database" % "h2" % "1.4.196",
       "ch.qos.logback" % "logback-classic" % "1.2.3",
-      "postgresql" % "postgresql" % "9.1-901.jdbc4"
+      "postgresql" % "postgresql" % "9.1-901.jdbc4",
+      "io.jvm.uuid" %% "scala-uuid" % "0.2.3"
     )
   )
